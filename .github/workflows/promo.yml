@@ -1,0 +1,43 @@
+name: hronos-promo
+
+# Еженедельная кросс-реклама каналов Maxforia Group в «Хроносе».
+# Одно воскресенье = один канал сети, строго по кругу (promo.json).
+# Воскресенье, 18:00 МСК (15:00 UTC) — прайм-тайм.
+on:
+  schedule:
+    - cron: "0 15 * * 0"
+  workflow_dispatch:
+
+permissions:
+  contents: write          # коммитим promo_state.json — это и есть «одно промо в неделю»
+
+concurrency:
+  group: hronos-promo
+  cancel-in-progress: false
+
+jobs:
+  promo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install SVG renderer + fonts
+        run: sudo apt-get update && sudo apt-get install -y librsvg2-bin fonts-dejavu-core
+
+      - name: Post weekly promo
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN || secrets.HRONOSCHANNELBOT }}
+          CHANNEL_ID: ${{ secrets.CHANNEL_ID }}
+        run: python3 promo.py --send
+
+      - name: Commit rotation state
+        run: |
+          git config user.name  "hronos-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add promo_state.json
+          git diff --staged --quiet || git commit -m "promo: неделя пройдена [skip ci]"
+          git push

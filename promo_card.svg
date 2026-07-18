@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350">
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#16181F"/><stop offset="1" stop-color="#0B0C10"/></linearGradient></defs>
+  <rect width="1080" height="1350" fill="url(#bg)"/>
+  <circle cx="960" cy="1210" r="150" fill="none" stroke="#E8E4DA" stroke-width="3" opacity="0.10"/>
+  <rect x="90" y="150" width="8" height="56" fill="#C0563A"/>
+  <text x="124" y="192" font-family="DejaVu Sans, Liberation Sans, Helvetica, Arial, sans-serif" font-size="30" font-weight="700" fill="#C0563A" letter-spacing="6">ЧТО ЕЩЁ ПОЧИТАТЬ</text>
+  <text x="90" y="320" font-family="DejaVu Sans, Liberation Sans, Helvetica, Arial, sans-serif" font-size="66" font-weight="700" fill="#E8E4DA">Мы разбираем сутки. Там</text>
+  <text x="90" y="404" font-family="DejaVu Sans, Liberation Sans, Helvetica, Arial, sans-serif" font-size="66" font-weight="700" fill="#E8E4DA">разбирают секунды</text>
+  <text x="90" y="528" font-family="DejaVu Sans, Liberation Sans, Helvetica, Arial, sans-serif" font-size="38" font-weight="400" fill="#7C8391">У нас день, который перевернул историю.</text>
+  <text x="90" y="582" font-family="DejaVu Sans, Liberation Sans, Helvetica, Arial, sans-serif" font-size="38" font-weight="400" fill="#7C8391">Бывает и меньший масштаб: один факт, от</text>
+  <text x="90" y="636" font-family="DejaVu Sans, Liberation Sans, Helvetica, Arial, sans-serif" font-size="38" font-weight="400" fill="#7C8391">которого картина мира едет вбок.</text>
+  <text x="90" y="724" font-family="DejaVu Sans, Liberation Sans, Helvetica, Arial, sans-serif" font-size="38" font-weight="700" fill="#E8E4DA">«Стоп, что?!» — факты, которые невозможно</text>
+  <text x="90" y="778" font-family="DejaVu Sans, Liberation Sans, Helvetica, Arial, sans-serif" font-size="38" font-weight="700" fill="#E8E4DA">оставить при себе: космос, тело, числа,</text>
+  <text x="90" y="832" font-family="DejaVu Sans, Liberation Sans, Helvetica, Arial, sans-serif" font-size="38" font-weight="700" fill="#E8E4DA">история. Каждый день по одному.</text>
+  <rect x="90" y="946" width="900" height="104" rx="10" fill="#C0563A"/>
+  <text x="540" y="1012" text-anchor="middle" font-family="DejaVu Sans, Liberation Sans, Helvetica, Arial, sans-serif" font-size="40" font-weight="700" fill="#0B0C10">Забрать факт дня</text>
+  <text x="540" y="1130" text-anchor="middle" font-family="DejaVu Sans, Liberation Sans, Helvetica, Arial, sans-serif" font-size="46" font-weight="700" fill="#E8E4DA" letter-spacing="2">@stop_chto_daily</text>
+</svg>
