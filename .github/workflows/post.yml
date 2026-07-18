@@ -34,7 +34,7 @@ jobs:
 
       - name: Post
         env:
-          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN || secrets.HRONOSCHANNELBOT }}
           CHANNEL_ID: ${{ secrets.CHANNEL_ID }}
           FUNNEL_BOT_USERNAME: ${{ secrets.FUNNEL_BOT_USERNAME }}
           N: ${{ github.event.inputs.count || '1' }}

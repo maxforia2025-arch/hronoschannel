@@ -251,8 +251,14 @@ def main(argv=None):
             print("  [" + flag + "] " + str(p.get("id")) + " — " + str(p.get("title", ""))[:60])
         return 0
 
-    token = os.environ.get("BOT_TOKEN", "").strip()
-    channel_id = os.environ.get("CHANNEL_ID", "").strip()
+    # Токен: основное имя BOT_TOKEN, но принимаем и HRONOSCHANNELBOT —
+    # именно так секрет назван в репозитории канала.
+    token = (os.environ.get("BOT_TOKEN", "")
+             or os.environ.get("HRONOSCHANNELBOT", "")).strip()
+    # Адрес канала: из окружения, иначе числовой id из config.json.
+    # Числовой id — не секрет, он бесполезен без токена, поэтому лежит в конфиге.
+    channel_id = (os.environ.get("CHANNEL_ID", "").strip()
+                  or str(cfg.get("channel_id_numeric") or "").strip())
 
     mode = "dry"
     if args.simulate:
