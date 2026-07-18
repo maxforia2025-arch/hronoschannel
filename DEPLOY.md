@@ -30,14 +30,12 @@
    блоками лежит в `../brand/BRAND.md`.
 2. **Бот-постер.** У **@BotFather** → `/newbot` → получи **BOT_TOKEN**.
    Добавь бота **администратором** канала с правом «Публиковать сообщения».
-3. **Репозиторий.** Создай приватный репо `hronos-bot` и залей туда содержимое
-   папки `engine/` (именно её содержимое — `.github/` должен оказаться в корне репо):
-   ```bash
-   cd "hronos_channel/engine" && git init && git add . && git commit -m "hronos engine"
-   git branch -M main
-   git remote add origin https://github.com/<твой-аккаунт>/hronos-bot.git
-   git push -u origin main
-   ```
+3. **Репозиторий.** ✅ **Уже сделано** — движок залит в
+   <https://github.com/maxforia2025-arch/hronoschannel>, ветка `main`.
+   Локальная папка `engine/` — это и есть рабочая копия репо, правки отсюда
+   уходят обычным `git push`.
+   > Проверь в **Settings → General**, что репозиторий **приватный**. Секретов в коде нет,
+   > но публичный репо отдаёт наружу весь банк постов на 12 дней вперёд.
 4. **Секреты.** В репо → **Settings → Secrets and variables → Actions → New repository secret**:
    - `BOT_TOKEN` — токен из шага 2
    - `CHANNEL_ID` — `@hronos_daily` (твой хендл) **или** числовой `-100…`
