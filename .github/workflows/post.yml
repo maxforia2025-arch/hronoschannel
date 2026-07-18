@@ -14,6 +14,10 @@ on:
         description: "Сколько постов опубликовать сейчас"
         default: "1"
         type: string
+      ids:
+        description: "Опубликовать конкретные посты: id через запятую (пусто = выбор автоматом)"
+        default: ""
+        type: string
 
 permissions:
   contents: write          # коммитим state.json обратно — это и есть анти-дубль
@@ -38,6 +42,7 @@ jobs:
           CHANNEL_ID: ${{ secrets.CHANNEL_ID }}
           FUNNEL_BOT_USERNAME: ${{ secrets.FUNNEL_BOT_USERNAME }}
           N: ${{ github.event.inputs.count || '1' }}
+          IDS: ${{ github.event.inputs.ids }}
         run: python3 post.py --send
 
       - name: Commit state (anti-duplicate)

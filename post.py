@@ -111,8 +111,21 @@ def ready_posts(posts):
     return out
 
 
-def choose(posts, state):
-    """Следующий пост: сначала непоказанные, потом самый давний. Без повторов."""
+def choose(posts, state, only_ids=None):
+    """Следующий пост: сначала непоказанные, потом самый давний. Без повторов.
+
+    only_ids — явный список id: публикуем именно их и в заданном порядке
+    (ручные прогоны, когда важно, что именно уйдёт в канал).
+    """
+    if only_ids:
+        seen = set(state.get("posted", []))
+        for pid in only_ids:
+            if pid in seen:
+                continue
+            for p in posts:
+                if p.get("id") == pid:
+                    return p
+        return None
     pool = ready_posts(posts)
     if not pool:
         return None
@@ -192,20 +205,86 @@ def send_telegram(token, channel_id, text):
     return data
 
 
+# ── картинки ─────────────────────────────────────────────────────────────────
+
+IMG_DIR = os.path.join(HERE, "img")
+CAPTION_LIMIT = 1024        # лимит Telegram на подпись к фото
+
+
+def find_image(post_id):
+    """Картинка поста: img/<id>.jpg|jpeg|png|webp. Нет файла — нет картинки."""
+    for ext in (".jpg", ".jpeg", ".png", ".webp"):
+        path = os.path.join(IMG_DIR, str(post_id) + ext)
+        if os.path.exists(path):
+            return path
+    return None
+
+
+def _multipart(fields, file_field, file_path):
+    """multipart/form-data вручную: только stdlib, без requests."""
+    boundary = "----hronos" + str(abs(hash(file_path)))
+    crlf = "\r\n"
+    body = b""
+    for key, val in fields.items():
+        body += ("--" + boundary + crlf).encode()
+        body += ('Content-Disposition: form-data; name="' + key + '"' + crlf + crlf).encode()
+        body += (str(val) + crlf).encode()
+    fname = os.path.basename(file_path)
+    ctype = "image/png" if fname.lower().endswith(".png") else "image/jpeg"
+    body += ("--" + boundary + crlf).encode()
+    body += ('Content-Disposition: form-data; name="photo"; filename="' + fname + '"'
+             + crlf).encode()
+    body += ("Content-Type: " + ctype + crlf + crlf).encode()
+    with open(file_path, "rb") as fh:
+        body += fh.read()
+    body += (crlf + "--" + boundary + "--" + crlf).encode()
+    return body, "multipart/form-data; boundary=" + boundary
+
+
+def send_telegram_photo(token, channel_id, text, image_path):
+    """Картинка сверху, текст под ней.
+
+    Если пост влезает в подпись (1024) — одно сообщение: фото + подпись.
+    Если длиннее — фото отдельным сообщением, следом текст: картинка всё
+    равно оказывается сверху, а текст не режется.
+    """
+    long_post = len(text) > CAPTION_LIMIT
+    fields = {"chat_id": channel_id, "parse_mode": "HTML"}
+    if not long_post:
+        fields["caption"] = text
+    body, ctype = _multipart(fields, "photo", image_path)
+    req = urllib.request.Request(
+        "https://api.telegram.org/bot" + token + "/sendPhoto",
+        data=body, headers={"User-Agent": UA, "Content-Type": ctype})
+    with urllib.request.urlopen(req, timeout=60) as resp:
+        data = json.loads(resp.read().decode("utf-8"))
+    if not data.get("ok"):
+        raise RuntimeError(data)
+    if long_post:
+        time.sleep(1)
+        send_telegram(token, channel_id, text)
+    return data
+
+
 # ── проход ───────────────────────────────────────────────────────────────────
 
-def run_once(posts, state, cfg, mode, token, channel_id):
-    post = choose(posts, state)
+def run_once(posts, state, cfg, mode, token, channel_id, only_ids=None):
+    post = choose(posts, state, only_ids)
     if post is None:
         log("банк пуст: нет ни одного готового поста. Заполни CONTENT_QUEUE.md "
             "и прогони fill_bank.py, либо запусти generate_posts.py --send.")
         return False
 
     text = format_post(post, cfg)
+    image = find_image(post.get("id"))
 
     if mode == "send":
-        send_telegram(token, channel_id, text)
-        log("опубликовано: " + str(post.get("id")) + " [" + str(post.get("cat", "-")) + "]")
+        if image:
+            send_telegram_photo(token, channel_id, text, image)
+        else:
+            send_telegram(token, channel_id, text)
+        log("опубликовано: " + str(post.get("id")) + " [" + str(post.get("cat", "-")) + "]"
+            + (" +картинка" if image else " (без картинки)"))
     else:
         print("\n" + "=" * 56)
         print(text)
@@ -229,6 +308,8 @@ def main(argv=None):
     ap.add_argument("--simulate", action="store_true",
                     help="без сети, но записать состояние (проверка анти-дубля)")
     ap.add_argument("--count", type=int, default=None, help="сколько постов за запуск")
+    ap.add_argument("--id", default=None,
+                    help="опубликовать конкретные посты: --id a,b,c (порядок сохраняется)")
     ap.add_argument("--status", action="store_true", help="показать состояние банка и выйти")
     args = ap.parse_args(argv)
 
@@ -269,9 +350,11 @@ def main(argv=None):
             return 2
         mode = "send"
 
-    count = args.count or int(os.environ.get("N", "1") or "1")
+    only = args.id or os.environ.get("IDS", "")
+    only_ids = [x.strip() for x in only.split(",") if x.strip()] or None
+    count = args.count or (len(only_ids) if only_ids else int(os.environ.get("N", "1") or "1"))
     for i in range(max(1, count)):
-        if not run_once(posts, state, cfg, mode, token, channel_id):
+        if not run_once(posts, state, cfg, mode, token, channel_id, only_ids):
             return 1
         if mode == "send" and i < count - 1:
             time.sleep(3)
