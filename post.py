@@ -211,6 +211,9 @@ IMG_DIR = os.path.join(HERE, "img")
 CAPTION_LIMIT = 1024        # лимит Telegram на подпись к фото
 
 
+CREDITS_PATH = os.path.join(IMG_DIR, "credits.json")
+
+
 def find_image(post_id):
     """Картинка поста: img/<id>.jpg|jpeg|png|webp. Нет файла — нет картинки."""
     for ext in (".jpg", ".jpeg", ".png", ".webp"):
@@ -218,6 +221,24 @@ def find_image(post_id):
         if os.path.exists(path):
             return path
     return None
+
+
+def image_credit(post_id):
+    """Строка авторства для картинки.
+
+    Для лицензий CC BY / CC BY-SA указание автора и лицензии — ОБЯЗАТЕЛЬНОЕ
+    условие использования. Для public domain не требуется, поэтому подпись
+    не добавляем: она только съедала бы место в посте.
+    """
+    credits = load_json(CREDITS_PATH, {}) or {}
+    item = credits.get(str(post_id))
+    if not item:
+        return ""
+    lic = str(item.get("license", ""))
+    if not lic.lower().startswith("cc by"):
+        return ""
+    author = html.escape(str(item.get("author", "")).strip() or "неизвестен")
+    return "\U0001F5BC Фото: " + author + " / " + html.escape(lic) + " · Wikimedia Commons"
 
 
 def _multipart(fields, file_field, file_path):
@@ -277,6 +298,9 @@ def run_once(posts, state, cfg, mode, token, channel_id, only_ids=None):
 
     text = format_post(post, cfg)
     image = find_image(post.get("id"))
+    credit = image_credit(post.get("id")) if image else ""
+    if credit:
+        text = text + "\n" + credit
 
     if mode == "send":
         if image:
