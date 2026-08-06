@@ -64,8 +64,9 @@
   "pearl_harbor_radar_2",
   "cuba_dobrynin",
   "hiroshima_weather",
-  "apollo13_kislorod"
+  "apollo13_kislorod",
+  "columbia_sts"
  ],
- "last_post_id": "apollo13_kislorod",
- "last_run": "2026-08-05T19:21:23Z"
+ "last_post_id": "columbia_sts",
+ "last_run": "2026-08-06T07:30:50Z"
 }
