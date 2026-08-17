@@ -97,8 +97,9 @@
   "titanic_led",
   "hindenburg_seconds",
   "pearl_radar_hawaii",
-  "krakatau_zvuk"
+  "krakatau_zvuk",
+  "guttenberg_bible_start"
  ],
- "last_post_id": "krakatau_zvuk",
- "last_run": "2026-08-16T18:19:11Z"
+ "last_post_id": "guttenberg_bible_start",
+ "last_run": "2026-08-17T05:25:19Z"
 }
