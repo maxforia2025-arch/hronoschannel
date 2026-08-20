@@ -107,8 +107,9 @@
   "titanic_ice_warnings",
   "chelyabinsk_utro",
   "marconi_atlantic",
-  "trinity_choice"
+  "trinity_choice",
+  "tulip_crash"
  ],
- "last_post_id": "trinity_choice",
- "last_run": "2026-08-20T05:20:28Z"
+ "last_post_id": "tulip_crash",
+ "last_run": "2026-08-20T11:32:00Z"
 }
