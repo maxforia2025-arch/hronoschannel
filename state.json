@@ -114,8 +114,9 @@
   "vasa_first_km",
   "boston_molasses",
   "wright_day",
-  "berlin_wall_fall"
+  "berlin_wall_fall",
+  "gutenberg_press_speed"
  ],
- "last_post_id": "berlin_wall_fall",
- "last_run": "2026-08-22T11:25:47Z"
+ "last_post_id": "gutenberg_press_speed",
+ "last_run": "2026-08-22T18:19:42Z"
 }
