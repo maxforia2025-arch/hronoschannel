@@ -112,8 +112,9 @@
   "sputnik_night",
   "salk_announce",
   "vasa_first_km",
-  "boston_molasses"
+  "boston_molasses",
+  "wright_day"
  ],
- "last_post_id": "boston_molasses",
- "last_run": "2026-08-21T18:27:29Z"
+ "last_post_id": "wright_day",
+ "last_run": "2026-08-22T05:16:14Z"
 }
