@@ -117,8 +117,9 @@
   "berlin_wall_fall",
   "gutenberg_press_speed",
   "telegram_horace",
-  "gutenberg_line"
+  "gutenberg_line",
+  "suez_open"
  ],
- "last_post_id": "gutenberg_line",
- "last_run": "2026-08-23T11:25:57Z"
+ "last_post_id": "suez_open",
+ "last_run": "2026-08-23T18:19:49Z"
 }
