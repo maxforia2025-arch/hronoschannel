@@ -128,8 +128,9 @@
   "franz_ferdinand_car",
   "vasa_ballast",
   "chernobyl_test_2",
-  "edison_menlo"
+  "edison_menlo",
+  "berlin_wall_slip"
  ],
- "last_post_id": "edison_menlo",
- "last_run": "2026-08-27T15:57:22Z"
+ "last_post_id": "berlin_wall_slip",
+ "last_run": "2026-08-27T20:56:48Z"
 }
