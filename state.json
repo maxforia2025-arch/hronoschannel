@@ -129,8 +129,9 @@
   "vasa_ballast",
   "chernobyl_test_2",
   "edison_menlo",
-  "berlin_wall_slip"
+  "berlin_wall_slip",
+  "hiroshima_weather_2"
  ],
- "last_post_id": "berlin_wall_slip",
- "last_run": "2026-08-27T20:56:48Z"
+ "last_post_id": "hiroshima_weather_2",
+ "last_run": "2026-08-28T01:59:22Z"
 }
