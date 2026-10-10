@@ -260,8 +260,9 @@
   "karta_08",
   "apollo13_oxygen_3",
   "pearl_harbor_radar_3",
-  "tsar_bomba"
+  "tsar_bomba",
+  "cuban_letter"
  ],
- "last_post_id": "tsar_bomba",
- "last_run": "2026-10-10T10:51:15Z"
+ "last_post_id": "cuban_letter",
+ "last_run": "2026-10-10T16:08:57Z"
 }
