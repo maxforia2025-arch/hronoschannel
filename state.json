@@ -275,8 +275,9 @@
   "pompeii_afternoon",
   "titanic_ice_warnings",
   "chelyabinsk_utro",
-  "marconi_atlantic"
+  "marconi_atlantic",
+  "trinity_choice"
  ],
- "last_post_id": "marconi_atlantic",
- "last_run": "2026-10-15T09:29:47Z"
+ "last_post_id": "trinity_choice",
+ "last_run": "2026-10-15T15:32:25Z"
 }
