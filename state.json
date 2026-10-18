@@ -285,8 +285,9 @@
   "wright_day",
   "berlin_wall_fall",
   "gutenberg_press_speed",
-  "telegram_horace"
+  "telegram_horace",
+  "gutenberg_line"
  ],
- "last_post_id": "telegram_horace",
- "last_run": "2026-10-18T14:24:54Z"
+ "last_post_id": "gutenberg_line",
+ "last_run": "2026-10-18T19:57:09Z"
 }
