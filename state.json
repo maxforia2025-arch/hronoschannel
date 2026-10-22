@@ -296,8 +296,9 @@
   "gavrilo_wrong_turn",
   "franz_ferdinand_car",
   "vasa_ballast",
-  "chernobyl_test_2"
+  "chernobyl_test_2",
+  "edison_menlo"
  ],
- "last_post_id": "chernobyl_test_2",
- "last_run": "2026-10-22T09:42:48Z"
+ "last_post_id": "edison_menlo",
+ "last_run": "2026-10-22T15:49:53Z"
 }
