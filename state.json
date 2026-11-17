@@ -373,8 +373,9 @@
   "chernobyl_test",
   "constantinople_1453",
   "titanic_iceberg",
-  "cuban_crisis_end"
+  "cuban_crisis_end",
+  "archduke_wrong_hospital"
  ],
- "last_post_id": "cuban_crisis_end",
- "last_run": "2026-11-17T01:25:38Z"
+ "last_post_id": "archduke_wrong_hospital",
+ "last_run": "2026-11-17T13:56:27Z"
 }
