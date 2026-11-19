@@ -380,8 +380,9 @@
   "nicholas_flight",
   "hiroshima_clear_sky",
   "petrograd_winter",
-  "berlin_wall_start"
+  "berlin_wall_start",
+  "pompeii_day"
  ],
- "last_post_id": "berlin_wall_start",
- "last_run": "2026-11-19T13:59:20Z"
+ "last_post_id": "pompeii_day",
+ "last_run": "2026-11-19T19:26:04Z"
 }
