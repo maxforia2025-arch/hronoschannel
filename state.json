@@ -401,8 +401,9 @@
   "reikjavik_1986",
   "pearl_harbor_radar_2",
   "cuba_dobrynin",
-  "hiroshima_weather"
+  "hiroshima_weather",
+  "apollo13_kislorod"
  ],
- "last_post_id": "hiroshima_weather",
- "last_run": "2026-11-26T14:34:10Z"
+ "last_post_id": "apollo13_kislorod",
+ "last_run": "2026-11-26T20:02:49Z"
 }
