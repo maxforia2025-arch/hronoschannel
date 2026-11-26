@@ -400,8 +400,9 @@
   "reichstag_fire_2",
   "reikjavik_1986",
   "pearl_harbor_radar_2",
-  "cuba_dobrynin"
+  "cuba_dobrynin",
+  "hiroshima_weather"
  ],
- "last_post_id": "cuba_dobrynin",
- "last_run": "2026-11-26T01:26:18Z"
+ "last_post_id": "hiroshima_weather",
+ "last_run": "2026-11-26T14:34:10Z"
 }
